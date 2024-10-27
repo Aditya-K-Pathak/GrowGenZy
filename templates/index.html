@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Landing Page</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Roboto:200,400,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=send" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+
+<body>
+    <div class="chat">
+        <div id="greeting">
+            <h5>Hi! I'm your assistant today!</h5>
+        </div>
+        <div class="chats">
+        </div>
+        <div id="chat-util">
+            <input type="text" id="chatbox">
+            <span onclick="getResponse()" class="material-symbols-outlined" style="color: green">
+                send
+            </span>
+        </div>
+    </div>
+    <img id="chat-bot" src="{% static 'images/chatbot.gif' %}" alt="Chat Bot" onclick="toggleChatBot()">
+    <div class="navbar" id="navbar">
+        <div class="logo">
+            <a href="#" style="font-size: 20px;">GROWGENZY</a>
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1 id="headline">WELCOME TO GROWGENZY</h1>
+        <p>Explore the beauty of dynamic backgrounds.</p>
+        <div class="btn-container">
+            <a href="#features" class="cta-button">Contact Us</a>
+            <a href="#features" class="cta-button">Learn More</a>
+        </div>
+    </div>
+    <div class="service-container">
+        <h1>OUR <span class="highlight">SERVICES</span></h1>
+        <div class="features">
+            {% for service in services %}
+
+            <div class="feature-item">
+                <video loop autoplay muted>
+                    <source src="{% static service.video %}">
+                </video>
+                <div class="feature-text">
+                    <h2>{{service.title}}</h2>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container testimonial-container">
+        <h1>WHAT PEOPLE THINK <span class="highlight">ABOUT US</span>?</h1>
+        <div class="testimonials">
+            {% for testimonial in testimonials %}
+            <div class="testimonial">
+                <img class="quote" src="{% static 'images/quote.png' %}" alt="">
+                <p><i>"{{testimonial.review}}"</i></p>
+                <hr>
+                <div class="reviewer">
+                    <h3>~ {{testimonial.author}}</h3>
+                    <h4>{{testimonial.designation}}</h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container testimonial-container">
+        <h1>HOW <span class="highlight">IT HAPPENS?</span></h1>
+        <div class="history-tl-container">
+            <ul class="tl">
+                <li class="tl-item" ng-repeat="item in retailer_history">
+                    <div class="timestamp">
+                        <!-- 3rd March 2015<br> 7:00 PM -->
+                    </div>
+                    <div class="item-title">Contact Us</div>
+                    <div class="item-detail">Drop your details in the form, we'll contact you.</div>
+                </li>
+                <li class="tl-item" ng-repeat="item in retailer_history">
+                    <div class="timestamp">
+                        <!-- 19th March 2015<br> 3:00 PM -->
+                    </div>
+                    <div class="item-title">Meet Us</div>
+                    <div class="item-detail">We'll schedule a meeting, know us and our services.</div>
+                </li>
+                <li class="tl-item" ng-repeat="item in retailer_history">
+                    <div class="timestamp">
+                        <!-- 1st June 2015<br> 7:00 PM -->
+                    </div>
+                    <div class="item-title">Discuss your job and problem</div>
+                    <div class="item-detail">Share your job details and challenges you are facing we'll solve it.</div>
+                </li>
+                <li class="tl-item" ng-repeat="item in retailer_history">
+                    <div class="timestamp">
+                        <!-- 1st June 2015<br> 7:00 PM -->
+                    </div>
+                    <div class="item-title">Handover your challenges and projects</div>
+                    <div class="item-detail">Handover your project we'll work upon it and we'll provide you with expert
+                        solution.</div>
+                </li>
+                <li class="tl-item" ng-repeat="item in retailer_history">
+                    <div class="timestamp">
+                        <!-- 1st June 2015<br> 7:00 PM -->
+                    </div>
+                    <div class="item-title">Watch your Growth</div>
+                    <div class="item-detail">Watch your firm grow with us.</div>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+    <div class="container testimonial-container">
+        <h1>TELL US <span class="highlight">ABOUT YOUR BUISNESS</span></h1>
+        <div class="form">
+            <form method="POST">
+                {% csrf_token %}
+                <input required name="fname" type="text" placeholder="First Name">
+                <input name="lname" type="text" placeholder="Last Name">
+                <input required name="email" type="email" placeholder="Email">
+                <input required name="phone" type="text" placeholder="Contact">
+                <input required name="firm_name" type="text" placeholder="Firm Name">
+                <input name="service" type="text" placeholder="Service You are Expecting">
+                <input id='submit' type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+<script src="{% static 'js/script.js' %}"></script>
+
+</html>
